@@ -35,7 +35,7 @@ driver = webdriver.Chrome(service=service, options=Options)
 df_titles = pd.DataFrame()
 Titles = []
 Reviews = []
-
+#
 def open_in_new_tab(driver, element):
     actions = ActionChains(driver)
     actions.key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
