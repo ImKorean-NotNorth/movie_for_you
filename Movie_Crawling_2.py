@@ -29,66 +29,70 @@ service = ChromeService(executable_path=ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=Options)
 
 #===============================================================================================
-
-
-
 df_titles = pd.DataFrame()
 Titles = []
 Reviews = []
+
+
+
 #
-def open_in_new_tab(driver, element):
-    actions = ActionChains(driver)
-    actions.key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
-    driver.switch_to.window(driver.window_handles[-1])
+# def open_in_new_tab(driver, element):
+#     actions = ActionChains(driver)
+#     actions.key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
+#     driver.switch_to.window(driver.window_handles[-1])
+#
+# def srolling():
+#     for _ in range(10):  # 50번 페이지 다운 시도
+#         # 페이지의 body 요소를 찾아서 end 키를 보냄
+#         driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.END)
+#         time.sleep(1)
+#
+#
+# # for z in range(1):
+#
+# df_titles = pd.DataFrame()
+# url = 'https://laftel.net/finder'
+# body = driver.find_element(By.TAG_NAME, "body")
+# driver.get(url)
+# time.sleep(2)
+#
+# sleep_sec = 3
+#
+# # 인기 순 버튼
+# button_CSS_pop = '#root > div.sc-f0aad20d-0.cJKdpk > div.sc-314e188f-0.hqsXVO > div.sc-314e188f-2.hVHfbj > div > div > div > div.simplebar-wrapper > div.simplebar-mask > div > div > div > div.sc-b650993-1.dPuSyZ > div.sc-42a3c8f1-0.eiatWD > div > div > div.sc-29d1736d-0.fkHAgS > div > div'
+# button = driver.find_element(By.CSS_SELECTOR, button_CSS_pop)
+# driver.execute_script("arguments[0].scrollIntoView(true);", button)
+# time.sleep(1)
+# # JavaScript로 클릭 시도
+# driver.execute_script("arguments[0].click();", button)
+# print("인기순 버튼 클릭")
+# time.sleep(2)  # 페이지 로딩 대기
+#
+# #리뷰 많은순 버튼
+# button_CSS_review = '#root > div.sc-f0aad20d-0.cJKdpk > div.sc-314e188f-0.hqsXVO > div.sc-314e188f-2.hVHfbj > div > div > div > div.simplebar-wrapper > div.simplebar-mask > div > div > div > div.sc-b650993-1.dPuSyZ > div.sc-42a3c8f1-0.eiatWD > div > div > div.sc-29d1736d-0.fkHAgS > div.sc-29d1736d-3.bblvNc > div:nth-child(6) > div.sc-29d1736d-8.fDdkop'
+# button = driver.find_element(By.CSS_SELECTOR, button_CSS_review)
+# driver.execute_script("arguments[0].scrollIntoView(true);", button)
+# time.sleep(1)
+# # JavaScript로 클릭 시도
+# driver.execute_script("arguments[0].click();", button)
+# print("리뷰순 버튼 클릭")
+# time.sleep(2)  # 페이지 로딩 대기
+#
+# # end 전 옆 배경 누르기
+# button_xpath_background = '//*[@id="root"]/div[2]/div[2]/div[2]/div/div/div/div[1]/div[2]/div/div/div/div[2]/div'
+# driver.find_element(By.XPATH, button_xpath_background).click()
+# time.sleep(sleep_sec)
+#
+# srolling()
+#time.sleep(5)
 
-def srolling():
-    for _ in range(10):  # 50번 페이지 다운 시도
-        # 페이지의 body 요소를 찾아서 end 키를 보냄
-        driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.END)
-        time.sleep(1)
-
-
-# for z in range(1):
-
-df_titles = pd.DataFrame()
-url = 'https://laftel.net/finder'
+driver.get("https://laftel.net/finder")
 body = driver.find_element(By.TAG_NAME, "body")
-driver.get(url)
-time.sleep(2)
-
-sleep_sec = 3
-
-# 인기 순 버튼
-button_CSS_pop = '#root > div.sc-f0aad20d-0.cJKdpk > div.sc-314e188f-0.hqsXVO > div.sc-314e188f-2.hVHfbj > div > div > div > div.simplebar-wrapper > div.simplebar-mask > div > div > div > div.sc-b650993-1.dPuSyZ > div.sc-42a3c8f1-0.eiatWD > div > div > div.sc-29d1736d-0.fkHAgS > div > div'
-button = driver.find_element(By.CSS_SELECTOR, button_CSS_pop)
-driver.execute_script("arguments[0].scrollIntoView(true);", button)
 time.sleep(1)
-# JavaScript로 클릭 시도
-driver.execute_script("arguments[0].click();", button)
-print("인기순 버튼 클릭")
-time.sleep(2)  # 페이지 로딩 대기
-
-#리뷰 많은순 버튼
-button_CSS_review = '#root > div.sc-f0aad20d-0.cJKdpk > div.sc-314e188f-0.hqsXVO > div.sc-314e188f-2.hVHfbj > div > div > div > div.simplebar-wrapper > div.simplebar-mask > div > div > div > div.sc-b650993-1.dPuSyZ > div.sc-42a3c8f1-0.eiatWD > div > div > div.sc-29d1736d-0.fkHAgS > div.sc-29d1736d-3.bblvNc > div:nth-child(6) > div.sc-29d1736d-8.fDdkop'
-button = driver.find_element(By.CSS_SELECTOR, button_CSS_review)
-driver.execute_script("arguments[0].scrollIntoView(true);", button)
-time.sleep(1)
-# JavaScript로 클릭 시도
-driver.execute_script("arguments[0].click();", button)
-print("리뷰순 버튼 클릭")
-time.sleep(2)  # 페이지 로딩 대기
-
-# end 전 옆 배경 누르기
-button_xpath_background = '//*[@id="root"]/div[2]/div[2]/div[2]/div/div/div/div[1]/div[2]/div/div/div/div[2]/div'
-driver.find_element(By.XPATH, button_xpath_background).click()
-time.sleep(sleep_sec)
-
-srolling()
-time.sleep(5)
 
 for i in range(1, 200):
     try:
-        TitleTap_Xpah = f'//*[@id="root"]/div[2t]/div[2]/div[2]/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/a[{i}]/div'
+        TitleTap_Xpath = f'//*[@id="root"]/div[2]/div[2]/div[2]/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/a[{i}]/div'
         driver.find_element(By.XPATH, TitleTap_Xpath).click()
         time.sleep(1)
 
@@ -126,28 +130,27 @@ print(Reviews)
 
 
 
-reviews_xpath = '//*[@id="item-tab-view"]/div[2]/div/section[2]/ul/div[{j}]/li/article'
-    # try:
-    #     review = driver.find_element(By.XPATH, reviews_xpath).text
-    #     title = re.compile('[^가-힣 ]').sub('', title)
-    #     # 그걸 리스트에 추가
-    #     titles.append(title)
+# try:
+#     review = driver.find_element(By.XPATH, reviews_xpath).text
+#     title = re.compile('[^가-힣 ]').sub('', title)
+#     # 그걸 리스트에 추가
+#     titles.append(title)
 
 
 
 
 
 # for i in range(1, 50):
-
-
-#driver.find_element(By.CSS_SELECTOR, #CSS 주소
+#
+#
+# driver.find_element(By.CSS_SELECTOR, #CSS 주소
 #                    "#item-tab-view > div.sc-f1e3e87e-2.evwnQw > div > div > div.sc-f1e3e87e-5.dvbprG > a:nth-child(2)").click()
-
+#
 # body = driver.find_element(By.TAG_NAME, 'body')
 # content_body = driver.find_element(By.XPATH, "//*[@id='content__body']")
-
-
-
+#
+#
+#
 # for i in range(3, 53):  # 1부터 50까지
 #     try:
 #         # 영화 제목 가져오기
@@ -175,26 +178,26 @@ reviews_xpath = '//*[@id="item-tab-view"]/div[2]/div/section[2]/ul/div[{j}]/li/a
 #         print(f"{i}: 오류 발생 (오류: {e})")
 #         driver.back()
 #         time.sleep()
-
+#
 # //*[@id="contents"]/div[5]/section[2]/div/article[40]/div[3]/a/h5
 # //*[@id="contents"]/div[5]/section[2]/div/article[60]/div[3]/a/h5
-
+#
 # 등급설정 말고는 XPATH 가능 XPATH는 '' celector는 "" 왜 안되고 왜 되는지 모르겠음
-
-
+#
+#
 # //*[@id="contents"]/div/div/div[3]/div[2]/div[1]/a/div/div[1]/div[1]/img
 # driver.find_element(By.CSS_SELECTOR,
 #                     "#").click()
-
-
-
+#
+#
+#
 # driver.find_element(By.XPATH, '//*[@id="contents"]/section/div[3]/div/div/div[6]/button/span').click()
-#왜 위에는 강제실행을 해야하지?,,
-
-
-
+# 왜 위에는 강제실행을 해야하지?,,
+#
+#
+#
 # 이 리뷰에는 스포일러가 포함되어 있습니다. x
 # div/p 가 포함되면 내용 삭제
-
+#
 # df_titles.to_csv(f'./crawling_data/naver_headline_news_2_3_{datetime.datetime.now().strftime("%y%m%d")}.csv',
 #                  index=False)

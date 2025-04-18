@@ -36,16 +36,16 @@ Reviews = []
 
 
 #
-# def open_in_new_tab(driver, element):
-#     actions = ActionChains(driver)
-#     actions.key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
-#     driver.switch_to.window(driver.window_handles[-1])
-#
-# def srolling():
-#     for _ in range(10):  # 50번 페이지 다운 시도
-#         # 페이지의 body 요소를 찾아서 end 키를 보냄
-#         driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.END)
-#         time.sleep(1)
+def open_in_new_tab(driver, element):
+    actions = ActionChains(driver)
+    actions.key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
+    driver.switch_to.window(driver.window_handles[-1])
+
+def srolling():
+    for _ in range(10):  # 50번 페이지 다운 시도
+        # 페이지의 body 요소를 찾아서 end 키를 보냄
+        driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.END)
+        time.sleep(1)
 #
 #
 # # for z in range(1):
@@ -100,12 +100,15 @@ for i in range(1, 200):
         driver.find_element(By.XPATH, ReviewsTap_Xpath).click()
         time.sleep(1)
 
+
+
         [(driver.find_element(By.XPATH, '//*[@id="item-tab-view"]').click(),
           time.sleep(0.5), body.send_keys(Keys.END), time.sleep(0.5)) for _ in range(4)] # 리뷰창 스크롤 4번
 
         # ✅ for j 루프 들여쓰기 수정
         for j in range(1, 50):
             try:
+
                 Reviews_xpath = f'//*[@id="item-tab-view"]/div[2]/div/section[2]/ul/div[{j}]/li/article'
                 Review = driver.find_element(By.XPATH, Reviews_xpath).text
                 Review = re.compile('[^가-힣 ]').sub('', Review)  # 한글만 남김
@@ -126,8 +129,6 @@ for i in range(1, 200):
 
 print("Finish")
 print(Reviews)
-
-
 
 
 # try:
